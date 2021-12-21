@@ -13,14 +13,15 @@ var api = new ParseServer({
 	//**** General Settings ****//
 
 	databaseURI:
-		"mongodb://sky4242:storm4242@localhost:27017/parse-dev?authSource=admin",
+		databaseUri ||
+		"mongodb://sky4242:storm4242@localhost:27017/fbcln?authSource=admin",
 	cloud: process.env.CLOUD_CODE_MAIN || __dirname + "/cloud/main.js",
 	serverURL: process.env.SERVER_URL || "http://localhost:1337/parse", // Don't forget to change to https if needed
 
 	//**** Security Settings ****//
 	// allowClientClassCreation: process.env.CLIENT_CLASS_CREATION || false,
 	appId: process.env.APP_ID || "101",
-	masterKey: process.env.MASTER_KEY || "202", //Add your master key here. Keep it secret!
+	masterKey: process.env.MASTER_KEY || "202  ", //Add your master key here. Keep it secret!
 
 	//**** Live Query ****//
 	// liveQuery: {
@@ -64,7 +65,6 @@ app.use("/public", express.static(path.join(__dirname, "/public")));
 
 // Serve the Parse API on the /parse URL prefix
 var mountPath = process.env.PARSE_MOUNT || "/parse";
-console.log(api);
 app.use(mountPath, api);
 
 // Parse Server plays nicely with the rest of your web routes
